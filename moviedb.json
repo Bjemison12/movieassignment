@@ -1,0 +1,71 @@
+{
+ "Movies": [
+  {
+   "Id": "b28f3cab-291e-40a3-9920-fc19cc2ab188",
+   "Title": "AquaMan",
+   "Genre": [
+    "Drama",
+    "Comedy",
+    "Romance"
+   ],
+   "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
+   "Director": "James Wan",
+   "Actors": [
+    "Jason Momoa",
+    "Amber Heard",
+    "Willem Dafoe"
+   ],
+   "Rating": 6.9
+  },
+  {
+   "Id": "0b0296cd-4afd-4643-b704-8775b5ab7ce0",
+   "Title": "Friday After Next",
+   "Genre": [
+    "Comedy",
+    "Drama"
+   ],
+   "Description": "Working as security guards, Craig and Day-Day run into the thief who stole their Christmas presents.",
+   "Director": "Marcus Raboy",
+   "Actors": [
+    "Ice Cube",
+    "Mike Epps",
+    "James Witherspoon"
+   ],
+   "Rating": 5.8
+  },
+  {
+   "Id": "396242b3-6d6e-4d65-a62b-597f35e4cf2c",
+   "Title": "Hercules",
+   "Genre": [
+    "Animation",
+    "Comedy",
+    "Adventure"
+   ],
+   "Description": "The son of Zeus and Hera is stripped of his immortality as an infant and must become a true hero in order to reclaim it.",
+   "Director": "Ron Clements",
+   "Actors": [
+    "Tate Donovan",
+    "Susan Egan",
+    "James Woods"
+   ],
+   "Rating": 7.3
+  },
+  {
+   "Id": "600f734e-ff33-48e0-80e8-32aa45cbe300",
+   "Title": "Crazy Rich Asians",
+   "Genre": [
+    "Drama",
+    "Comedy",
+    "Romance"
+   ],
+   "Description": "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
+   "Director": "Jon M Chu",
+   "Actors": [
+    "Constance Wu",
+    "HEnry Golding",
+    "Michelle Yeoh"
+   ],
+   "Rating": 6.9
+  }
+ ]
+}
