@@ -9,23 +9,23 @@ import (
 
 type InvalidRatingError error
 
-type Service struct{
+type Service struct {
 	Repo repository.Repo
 }
 
-func NewService(r repository.Repo) Service{
+func NewService(r repository.Repo) Service {
 	return Service{
 		Repo: r,
 	}
 }
 
-func(s Service) CreateNewMovie(mv entities.Movie) error{
+func (s Service) CreateNewMovie(mv entities.Movie) error {
 
 	mv.Id = uuid.New().String()
 
-	if mv.Rating >= 0 &&  mv.Rating <= 10 {
+	if mv.Rating >= 0 && mv.Rating <= 10 {
 		err := s.Repo.CreateNewMovie(mv)
-		if err != nil{
+		if err != nil {
 			return err
 		}
 		return nil
@@ -33,19 +33,27 @@ func(s Service) CreateNewMovie(mv entities.Movie) error{
 	return errors.New("invalid rating")
 }
 
-func(s Service) GetAll()(repository.MvStruct, error) {
+func (s Service) GetAll() (repository.MvStruct, error) {
 	fValue, err := s.Repo.GetAll()
-	if err != nil{
-		return fValue, nil
+	if err != nil {
+		return fValue, err
 	}
 	return fValue, nil
 }
 
-func (s Service) GetById(id string)(entities.Movie, error)  {
+func (s Service) GetById(id string) (entities.Movie, error) {
 	m, err := s.Repo.GetByID(id)
-	if err != nil{
-		return m, nil
+	if err != nil {
+		return m, err
 	}
 	return m, nil
 }
 
+func (s Service) DeleteMovieByID(id string) error {
+	err := s.Repo.DeleteByID(id)
+	if err != nil {
+		return err
+	}
+	return nil
+
+}

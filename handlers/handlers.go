@@ -13,22 +13,22 @@ type MovieHandler struct {
 	Svc service.Service
 }
 
-func NewMovieHandler(s service.Service) MovieHandler  {
+func NewMovieHandler(s service.Service) MovieHandler {
 	return MovieHandler{
 		Svc: s,
 	}
 }
 
-func(mh MovieHandler) PostMovieHandler(w http.ResponseWriter, r *http.Request){
+func (mh MovieHandler) PostMovieHandler(w http.ResponseWriter, r *http.Request) {
 	mv := entities.Movie{}
 
 	err := json.NewDecoder(r.Body).Decode(&mv)
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 
 	err = mh.Svc.CreateNewMovie(mv)
-	if err != nil{
+	if err != nil {
 		switch err.Error() {
 		case "movie already exists":
 			http.Error(w, err.Error(), http.StatusBadRequest)
@@ -43,15 +43,15 @@ func(mh MovieHandler) PostMovieHandler(w http.ResponseWriter, r *http.Request){
 
 }
 
-func (mh MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
+func (mh *MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
 	mhDB, err := mh.Svc.GetAll()
-	if err != nil{
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
 
 	mMovDB, _ := json.MarshalIndent(mhDB, "", " ")
-	if err != nil{
-		http.Error(w, err.Error(), http.StatusBadRequest)
+	if err != nil {
+		fmt.Print(err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
@@ -60,20 +60,43 @@ func (mh MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (mh MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request){
+func (mh *MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
 	mvId := mux.Vars(r)
-	getId := mvId["Id"]
-	selectedMovie,err := mh.Svc.GetById(getId)
-	if err != nil{
+	getId := mvId["id"]
+	selectedMovie, err := mh.Svc.GetById(getId)
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusNoContent)
 	}
 
 	mvResponse, _ := json.MarshalIndent(selectedMovie, "", " ")
-	if err != nil{
-		http.Error(w, err.Error(), http.StatusBadRequest)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(mvResponse)
+}
+
+//func (mh *MovieHandler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
+//
+//}
+
+func (mh *MovieHandler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
+	mvID := mux.Vars(r)
+	id := mvID["Id"]
+
+	err := mh.Svc.DeleteMovieByID(id)
+	if err != nil {
+		switch err.Error() {
+		case "request not valid":
+			http.Error(w, err.Error(), http.StatusBadRequest)
+		case "delete request failed, movie does not exist":
+			http.Error(w, err.Error(), http.StatusNotFound)
+		case "Server issue, try again":
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
 }
