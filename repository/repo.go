@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"movieassignment/entities"
 )
 
@@ -22,7 +23,7 @@ func NewRepository(filename string) Repo {
 	}
 }
 
-func (r *Repo) CreateNewMovie(mv entities.Movie) error {
+func (r Repo) CreateNewMovie(mv entities.Movie) error {
 	ms := MvStruct{}
 
 	jsonBytes, err := ioutil.ReadFile(r.Filename)
@@ -48,7 +49,7 @@ func (r *Repo) CreateNewMovie(mv entities.Movie) error {
 	return nil
 }
 
-func (r *Repo) GetAll() (MvStruct, error) {
+func (r Repo) GetAll() (MvStruct, error) {
 	fn, err := ioutil.ReadFile(r.Filename)
 	if err != nil {
 		fmt.Println(err)
@@ -61,7 +62,7 @@ func (r *Repo) GetAll() (MvStruct, error) {
 	return ms, nil
 }
 
-func (r *Repo) GetByID(id string) (entities.Movie, error) {
+func (r Repo) GetByID(id string) (entities.Movie, error) {
 	file, err := ioutil.ReadFile(r.Filename)
 	if err != nil {
 		fmt.Println(err)
@@ -81,8 +82,10 @@ func (r *Repo) GetByID(id string) (entities.Movie, error) {
 	return entities.Movie{}, errors.New("movie not found")
 }
 
-func (r *Repo) DeleteByID(id string) error {
+func (r Repo) DeleteByID(id string) error {
+	//instance of slice of movies
 	m := MvStruct{}
+
 	file, err := ioutil.ReadFile(r.Filename)
 	if err != nil {
 		fmt.Println(err)
@@ -93,18 +96,21 @@ func (r *Repo) DeleteByID(id string) error {
 		return err
 	}
 
-	//size := len(m.Movies)
-
 	for index, value := range m.Movies {
 		if value.Id == id {
 			m.Movies = append(m.Movies[:index], m.Movies[index+1:]...)
-			marshal, err := json.MarshalIndent(&m, "", " ")
-			if err != nil {
-				return err
-			}
-			err = ioutil.WriteFile(r.Filename, marshal, 0644)
-			return nil
+			log.Printf("Movie Array: %+v", m.Movies)
 		}
 	}
-	return err
+
+	marshal, err := json.MarshalIndent(m, "", " ")
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(r.Filename, marshal, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

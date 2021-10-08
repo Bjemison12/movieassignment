@@ -43,7 +43,7 @@ func (mh MovieHandler) PostMovieHandler(w http.ResponseWriter, r *http.Request) 
 
 }
 
-func (mh *MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
+func (mh MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
 	mhDB, err := mh.Svc.GetAll()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -60,7 +60,7 @@ func (mh *MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (mh *MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
+func (mh MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
 	mvId := mux.Vars(r)
 	getId := mvId["id"]
 	selectedMovie, err := mh.Svc.GetById(getId)
@@ -82,9 +82,9 @@ func (mh *MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
 //
 //}
 
-func (mh *MovieHandler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
+func (mh MovieHandler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	mvID := mux.Vars(r)
-	id := mvID["Id"]
+	id := mvID["id"]
 
 	err := mh.Svc.DeleteMovieByID(id)
 	if err != nil {

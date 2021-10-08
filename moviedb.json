@@ -51,7 +51,41 @@
    "Rating": 7.3
   },
   {
-   "Id": "600f734e-ff33-48e0-80e8-32aa45cbe300",
+   "Id": "b0ad68a8-81a4-411a-9e2f-5d9dd5f5088a",
+   "Title": "AquaMan",
+   "Genre": [
+    "Drama",
+    "Comedy",
+    "Romance"
+   ],
+   "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
+   "Director": "James Wan",
+   "Actors": [
+    "Jason Momoa",
+    "Amber Heard",
+    "Willem Dafoe"
+   ],
+   "Rating": 6.9
+  },
+  {
+   "Id": "397a0177-d029-4ace-bbec-0d168fff828a",
+   "Title": "AquaMan",
+   "Genre": [
+    "Drama",
+    "Comedy",
+    "Romance"
+   ],
+   "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
+   "Director": "James Wan",
+   "Actors": [
+    "Jason Momoa",
+    "Amber Heard",
+    "Willem Dafoe"
+   ],
+   "Rating": 6.9
+  },
+  {
+   "Id": "ab0fd4e0-25e1-492c-b3a4-ab6939f9c96f",
    "Title": "Crazy Rich Asians",
    "Genre": [
     "Drama",
