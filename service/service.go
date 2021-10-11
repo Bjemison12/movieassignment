@@ -21,7 +21,7 @@ func NewService(r repository.Repo) Service {
 
 func (s Service) CreateNewMovie(mv entities.Movie) error {
 
-	mv.Id = uuid.New().String()
+	mv.Id = uuid.New().String() // this creates a new UUID with the movie when its created.
 
 	if mv.Rating >= 0 && mv.Rating <= 10 {
 		err := s.Repo.CreateNewMovie(mv)
@@ -47,6 +47,14 @@ func (s Service) GetById(id string) (entities.Movie, error) {
 		return m, err
 	}
 	return m, nil
+}
+
+func (s Service) UpdateById(id string, m entities.Movie) error {
+	err := s.Repo.UpdateByID(id, m)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (s Service) DeleteMovieByID(id string) error {

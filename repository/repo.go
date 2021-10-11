@@ -82,8 +82,34 @@ func (r Repo) GetByID(id string) (entities.Movie, error) {
 	return entities.Movie{}, errors.New("movie not found")
 }
 
+func (r *Repo) UpdateByID(id string, m entities.Movie) error {
+
+	file, err := ioutil.ReadFile(r.Filename)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	mvDb := MvStruct{}
+	err = json.Unmarshal(file, &mvDb)
+
+	for i, v := range mvDb.Movies {
+		if v.Id == id {
+			mvDb.Movies[i] = m
+		}
+	}
+	marshal, err := json.MarshalIndent(mvDb.Movies, "", " ")
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(r.Filename, marshal, 0644)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (r Repo) DeleteByID(id string) error {
-	//instance of slice of movies
+	//instance of slice of movie struct
 	m := MvStruct{}
 
 	file, err := ioutil.ReadFile(r.Filename)

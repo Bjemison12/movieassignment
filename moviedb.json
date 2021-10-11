@@ -1,105 +1,101 @@
-{
- "Movies": [
-  {
-   "Id": "b28f3cab-291e-40a3-9920-fc19cc2ab188",
-   "Title": "AquaMan",
-   "Genre": [
-    "Drama",
-    "Comedy",
-    "Romance"
-   ],
-   "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
-   "Director": "James Wan",
-   "Actors": [
-    "Jason Momoa",
-    "Amber Heard",
-    "Willem Dafoe"
-   ],
-   "Rating": 6.9
-  },
-  {
-   "Id": "0b0296cd-4afd-4643-b704-8775b5ab7ce0",
-   "Title": "Friday After Next",
-   "Genre": [
-    "Comedy",
-    "Drama"
-   ],
-   "Description": "Working as security guards, Craig and Day-Day run into the thief who stole their Christmas presents.",
-   "Director": "Marcus Raboy",
-   "Actors": [
-    "Ice Cube",
-    "Mike Epps",
-    "James Witherspoon"
-   ],
-   "Rating": 5.8
-  },
-  {
-   "Id": "396242b3-6d6e-4d65-a62b-597f35e4cf2c",
-   "Title": "Hercules",
-   "Genre": [
-    "Animation",
-    "Comedy",
-    "Adventure"
-   ],
-   "Description": "The son of Zeus and Hera is stripped of his immortality as an infant and must become a true hero in order to reclaim it.",
-   "Director": "Ron Clements",
-   "Actors": [
-    "Tate Donovan",
-    "Susan Egan",
-    "James Woods"
-   ],
-   "Rating": 7.3
-  },
-  {
-   "Id": "b0ad68a8-81a4-411a-9e2f-5d9dd5f5088a",
-   "Title": "AquaMan",
-   "Genre": [
-    "Drama",
-    "Comedy",
-    "Romance"
-   ],
-   "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
-   "Director": "James Wan",
-   "Actors": [
-    "Jason Momoa",
-    "Amber Heard",
-    "Willem Dafoe"
-   ],
-   "Rating": 6.9
-  },
-  {
-   "Id": "397a0177-d029-4ace-bbec-0d168fff828a",
-   "Title": "AquaMan",
-   "Genre": [
-    "Drama",
-    "Comedy",
-    "Romance"
-   ],
-   "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
-   "Director": "James Wan",
-   "Actors": [
-    "Jason Momoa",
-    "Amber Heard",
-    "Willem Dafoe"
-   ],
-   "Rating": 6.9
-  },
-  {
-   "Id": "ab0fd4e0-25e1-492c-b3a4-ab6939f9c96f",
-   "Title": "Crazy Rich Asians",
-   "Genre": [
-    "Drama",
-    "Comedy",
-    "Romance"
-   ],
-   "Description": "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
-   "Director": "Jon M Chu",
-   "Actors": [
-    "Constance Wu",
-    "HEnry Golding",
-    "Michelle Yeoh"
-   ],
-   "Rating": 6.9
-  }
- ]
-}
+[
+ {
+  "Id": "41761ab8-71d8-48ff-8a0c-da96ae84a9a6",
+  "Title": "Crazy Rich Asians",
+  "Genre": [
+   "Drama",
+   "Comedy",
+   "Romance"
+  ],
+  "Description": "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family",
+  "Director": "Jon M Chu",
+  "Actors": [
+   "Constance Wu",
+   "HEnry Golding",
+   "Michelle Yeoh"
+  ],
+  "Rating": 6.9
+ },
+ {
+  "Id": "85e5026b-4226-414e-8fa0-ec0f2d9903c0",
+  "Title": "Hercules",
+  "Genre": [
+   "Animation",
+   "Comedy",
+   "Adventure"
+  ],
+  "Description": "The son of Zeus and Hera is stripped of his immortality as an infant and must become a true hero in order to reclaim it.",
+  "Director": "Ron Clements",
+  "Actors": [
+   "Tate Donovan",
+   "Susan Egan",
+   "James Woods"
+  ],
+  "Rating": 7.3
+ },
+ {
+  "Id": "b0991777-7912-4b68-aba0-ae0c92d4b65e",
+  "Title": "AquaMan",
+  "Genre": [
+   "Drama",
+   "Comedy",
+   "Romance"
+  ],
+  "Description": "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
+  "Director": "James Wan",
+  "Actors": [
+   "Jason Momoa",
+   "Amber Heard",
+   "Willem Dafoe"
+  ],
+  "Rating": 6.9
+ },
+ {
+  "Id": "7ede4bc3-7db2-48ae-aa72-67c84fb5f24f",
+  "Title": "Friday After Next",
+  "Genre": [
+   "Comedy",
+   "Drama"
+  ],
+  "Description": "Working as security guards, Craig and Day-Day run into the thief who stole their Christmas presents.",
+  "Director": "Marcus Raboy",
+  "Actors": [
+   "Ice Cube",
+   "Mike Epps",
+   "James Witherspoon"
+  ],
+  "Rating": 5.8
+ },
+ {
+  "Id": "7c8f84e4-0ca9-4461-bcc2-c685cd6bb2e1",
+  "Title": "Friday After Next",
+  "Genre": [
+   "Comedy",
+   "Drama"
+  ],
+  "Description": "Working as security guards, Craig and Day-Day run into the thief who stole their Christmas presents.",
+  "Director": "Marcus Raboy",
+  "Actors": [
+   "Ice Cube",
+   "Mike Epps",
+   "James Witherspoon"
+  ],
+  "Rating": 5.8
+ },
+ {
+  "Id": "",
+  "Title": "The update",
+  "Genre": [
+   "The Update",
+   "Drama"
+  ],
+  "Description": "Working as security guards, Craig and Day-Day run into the thief who stole their Christmas presents.",
+  "Director": "Marcus Raboy",
+  "Actors": [
+   "The update",
+   "Mike Epps",
+   "James Witherspoon"
+  ],
+  "Rating": 5.8
+ }
+]

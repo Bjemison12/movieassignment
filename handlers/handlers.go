@@ -63,6 +63,7 @@ func (mh MovieHandler) GetAllMovies(w http.ResponseWriter, r *http.Request) {
 func (mh MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
 	mvId := mux.Vars(r)
 	getId := mvId["id"]
+
 	selectedMovie, err := mh.Svc.GetById(getId)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNoContent)
@@ -78,9 +79,23 @@ func (mh MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
 	_, _ = w.Write(mvResponse)
 }
 
-//func (mh *MovieHandler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
-//
-//}
+func (mh MovieHandler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
+	mvID := mux.Vars(r)
+	id := mvID["id"]
+	m := entities.Movie{}
+
+	err := json.NewDecoder(r.Body).Decode(&m)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = mh.Svc.UpdateById(id, m)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+}
 
 func (mh MovieHandler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	mvID := mux.Vars(r)
