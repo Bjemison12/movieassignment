@@ -82,7 +82,7 @@ func (r Repo) GetByID(id string) (entities.Movie, error) {
 	return entities.Movie{}, errors.New("movie not found")
 }
 
-func (r *Repo) UpdateByID(id string, m entities.Movie) error {
+func (r Repo) UpdateByID(id string, m entities.Movie) error {
 
 	file, err := ioutil.ReadFile(r.Filename)
 	if err != nil {

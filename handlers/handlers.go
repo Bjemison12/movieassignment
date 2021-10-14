@@ -5,15 +5,32 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"movieassignment/entities"
-	"movieassignment/service"
+	"movieassignment/repository"
+	//"movieassignment/service"
 	"net/http"
 )
 
-type MovieHandler struct {
-	Svc service.Service
+//type MovieService interface {
+//	PostMovieHandler(w http.ResponseWriter, r *http.Request)
+//	GetAllMovies(w http.ResponseWriter, r *http.Request)
+//	GetMovieById(w http.ResponseWriter, r *http.Request)
+//	UpdateMovie(w http.ResponseWriter, r *http.Request)
+//	DeleteMovie(w http.ResponseWriter, r *http.Request)
+//}
+
+type MovieService interface {
+	CreateNewMovie(mv entities.Movie) error
+	GetAll() (repository.MvStruct, error)
+	GetByID(id string) (entities.Movie, error)
+	UpdateByID(id string, m entities.Movie) error
+	DeleteByID(id string) error
 }
 
-func NewMovieHandler(s service.Service) MovieHandler {
+type MovieHandler struct {
+	Svc MovieService
+}
+
+func NewMovieHandler(s MovieService) MovieHandler {
 	return MovieHandler{
 		Svc: s,
 	}
@@ -64,7 +81,7 @@ func (mh MovieHandler) GetMovieByID(w http.ResponseWriter, r *http.Request) {
 	mvId := mux.Vars(r)
 	getId := mvId["id"]
 
-	selectedMovie, err := mh.Svc.GetById(getId)
+	selectedMovie, err := mh.Svc.GetByID(getId)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNoContent)
 	}
@@ -89,7 +106,7 @@ func (mh MovieHandler) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	err = mh.Svc.UpdateById(id, m)
+	err = mh.Svc.UpdateByID(id, m)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 	}
@@ -101,7 +118,7 @@ func (mh MovieHandler) DeleteMovie(w http.ResponseWriter, r *http.Request) {
 	mvID := mux.Vars(r)
 	id := mvID["id"]
 
-	err := mh.Svc.DeleteMovieByID(id)
+	err := mh.Svc.DeleteByID(id)
 	if err != nil {
 		switch err.Error() {
 		case "request not valid":

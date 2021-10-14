@@ -21,8 +21,8 @@ func main() {
 	log.Print("This Prints 1st")
 
 	r := repository.NewRepository(fn)
-	svc := service.NewService(r)
-	hdlr := handlers.NewMovieHandler(svc)
+	newSvc := service.NewService(r)
+	hdlr := handlers.NewMovieHandler(newSvc)
 	router := handlers.RouterConfiguration(hdlr)
 	svr := &http.Server{
 		Addr:    "127.0.0.1:8080",

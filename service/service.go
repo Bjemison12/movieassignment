@@ -7,24 +7,30 @@ import (
 	"movieassignment/repository"
 )
 
-type InvalidRatingError error
-
-type Service struct {
-	Repo repository.Repo
+type MovieRepository interface {
+	CreateNewMovie(mv entities.Movie) error
+	GetAll() (repository.MvStruct, error)
+	GetByID(id string) (entities.Movie, error)
+	UpdateByID(id string, m entities.Movie) error
+	DeleteByID(id string) error
 }
 
-func NewService(r repository.Repo) Service {
+type Service struct {
+	Repo MovieRepository
+}
+
+func NewService(r MovieRepository) Service {
 	return Service{
-		Repo: r,
+		r,
 	}
 }
 
 func (s Service) CreateNewMovie(mv entities.Movie) error {
-
+	newMV := entities.Movie{}
 	mv.Id = uuid.New().String() // this creates a new UUID with the movie when its created.
 
 	if mv.Rating >= 0 && mv.Rating <= 10 {
-		err := s.Repo.CreateNewMovie(mv)
+		err := s.Repo.CreateNewMovie(newMV)
 		if err != nil {
 			return err
 		}
@@ -41,7 +47,7 @@ func (s Service) GetAll() (repository.MvStruct, error) {
 	return fValue, nil
 }
 
-func (s Service) GetById(id string) (entities.Movie, error) {
+func (s Service) GetByID(id string) (entities.Movie, error) {
 	m, err := s.Repo.GetByID(id)
 	if err != nil {
 		return m, err
@@ -49,7 +55,10 @@ func (s Service) GetById(id string) (entities.Movie, error) {
 	return m, nil
 }
 
-func (s Service) UpdateById(id string, m entities.Movie) error {
+func (s Service) UpdateByID(id string, m entities.Movie) error {
+	if id != m.Id {
+		return errors.New("id in body must match url id")
+	}
 	err := s.Repo.UpdateByID(id, m)
 	if err != nil {
 		return err
@@ -57,7 +66,7 @@ func (s Service) UpdateById(id string, m entities.Movie) error {
 	return nil
 }
 
-func (s Service) DeleteMovieByID(id string) error {
+func (s Service) DeleteByID(id string) error {
 	err := s.Repo.DeleteByID(id)
 	if err != nil {
 		return err
