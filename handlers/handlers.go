@@ -6,19 +6,10 @@ import (
 	"github.com/gorilla/mux"
 	"movieassignment/entities"
 	"movieassignment/repository"
-	//"movieassignment/service"
 	"net/http"
 )
 
-//type MovieService interface {
-//	PostMovieHandler(w http.ResponseWriter, r *http.Request)
-//	GetAllMovies(w http.ResponseWriter, r *http.Request)
-//	GetMovieById(w http.ResponseWriter, r *http.Request)
-//	UpdateMovie(w http.ResponseWriter, r *http.Request)
-//	DeleteMovie(w http.ResponseWriter, r *http.Request)
-//}
-
-type MovieService interface {
+type Service interface {
 	CreateNewMovie(mv entities.Movie) error
 	GetAll() (repository.MvStruct, error)
 	GetByID(id string) (entities.Movie, error)
@@ -27,10 +18,10 @@ type MovieService interface {
 }
 
 type MovieHandler struct {
-	Svc MovieService
+	Svc Service
 }
 
-func NewMovieHandler(s MovieService) MovieHandler {
+func NewMovieHandler(s Service) MovieHandler {
 	return MovieHandler{
 		Svc: s,
 	}

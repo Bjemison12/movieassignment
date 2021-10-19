@@ -13,6 +13,8 @@ type MvStruct struct {
 	Movies []entities.Movie
 }
 
+var MoviesSlice []entities.Movie
+
 type Repo struct {
 	Filename string
 }
@@ -24,7 +26,7 @@ func NewRepository(filename string) Repo {
 }
 
 func (r Repo) CreateNewMovie(mv entities.Movie) error {
-	ms := MvStruct{}
+	ms := MoviesSlice
 
 	jsonBytes, err := ioutil.ReadFile(r.Filename)
 	if err != nil {
@@ -35,7 +37,8 @@ func (r Repo) CreateNewMovie(mv entities.Movie) error {
 		return err
 	}
 
-	ms.Movies = append(ms.Movies, mv)
+	//ms.Movies = append(ms.Movies, mv)
+	ms = append(ms, mv)
 
 	byteSlice, err := json.MarshalIndent(ms, "", " ")
 	if err != nil {
@@ -59,6 +62,7 @@ func (r Repo) GetAll() (MvStruct, error) {
 	if err != nil {
 		return ms, err
 	}
+
 	return ms, nil
 }
 

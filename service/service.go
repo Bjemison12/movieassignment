@@ -7,7 +7,7 @@ import (
 	"movieassignment/repository"
 )
 
-type MovieRepository interface {
+type Repo interface {
 	CreateNewMovie(mv entities.Movie) error
 	GetAll() (repository.MvStruct, error)
 	GetByID(id string) (entities.Movie, error)
@@ -15,22 +15,21 @@ type MovieRepository interface {
 	DeleteByID(id string) error
 }
 
-type Service struct {
-	Repo MovieRepository
+type ServRepository struct {
+	ServiceRepo Repo
 }
 
-func NewService(r MovieRepository) Service {
-	return Service{
+func NewService(r Repo) ServRepository {
+	return ServRepository{
 		r,
 	}
 }
 
-func (s Service) CreateNewMovie(mv entities.Movie) error {
-	newMV := entities.Movie{}
+func (s ServRepository) CreateNewMovie(mv entities.Movie) error {
 	mv.Id = uuid.New().String() // this creates a new UUID with the movie when its created.
 
 	if mv.Rating >= 0 && mv.Rating <= 10 {
-		err := s.Repo.CreateNewMovie(newMV)
+		err := s.ServiceRepo.CreateNewMovie(mv)
 		if err != nil {
 			return err
 		}
@@ -39,35 +38,35 @@ func (s Service) CreateNewMovie(mv entities.Movie) error {
 	return errors.New("invalid rating")
 }
 
-func (s Service) GetAll() (repository.MvStruct, error) {
-	fValue, err := s.Repo.GetAll()
+func (s ServRepository) GetAll() (repository.MvStruct, error) {
+	fValue, err := s.ServiceRepo.GetAll()
 	if err != nil {
 		return fValue, err
 	}
 	return fValue, nil
 }
 
-func (s Service) GetByID(id string) (entities.Movie, error) {
-	m, err := s.Repo.GetByID(id)
+func (s ServRepository) GetByID(id string) (entities.Movie, error) {
+	m, err := s.ServiceRepo.GetByID(id)
 	if err != nil {
 		return m, err
 	}
 	return m, nil
 }
 
-func (s Service) UpdateByID(id string, m entities.Movie) error {
+func (s ServRepository) UpdateByID(id string, m entities.Movie) error {
 	if id != m.Id {
 		return errors.New("id in body must match url id")
 	}
-	err := s.Repo.UpdateByID(id, m)
+	err := s.ServiceRepo.UpdateByID(id, m)
 	if err != nil {
 		return err
 	}
 	return nil
 }
 
-func (s Service) DeleteByID(id string) error {
-	err := s.Repo.DeleteByID(id)
+func (s ServRepository) DeleteByID(id string) error {
+	err := s.ServiceRepo.DeleteByID(id)
 	if err != nil {
 		return err
 	}
